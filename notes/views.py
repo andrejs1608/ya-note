@@ -1,7 +1,8 @@
+from django.contrib.auth import logout
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.urls import reverse_lazy
 from django.views import generic
-
+from django.shortcuts import render
 from .forms import NoteForm
 from .models import Note
 
@@ -52,8 +53,15 @@ class NoteDelete(NoteBase, generic.DeleteView):
 class NotesList(NoteBase, generic.ListView):
     """Список всех заметок пользователя."""
     template_name = 'notes/list.html'
+    context_object_name = 'notes_list'
 
 
 class NoteDetail(NoteBase, generic.DetailView):
     """Заметка подробно."""
     template_name = 'notes/detail.html'
+
+
+def logout_view(request):
+    """Выход из системы."""
+    logout(request)
+    return render(request, 'registration/logout.html')
