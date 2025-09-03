@@ -6,7 +6,6 @@ import pytest
 from django.urls import reverse
 from pytest_django.asserts import assertRedirects
 
-
 @pytest.mark.parametrize(
     'name',  
     ('notes:home', 'users:login', 'users:logout', 'users:signup')
@@ -17,7 +16,7 @@ def test_pages_availability_for_anonymous_user(client, name):
     assert response.status_code == HTTPStatus.OK
 
 
-@pytest.mark.parametrize(
+@pytest.mark.parametrize( 
     'name',
     ('notes:list', 'notes:add', 'notes:success')
 )

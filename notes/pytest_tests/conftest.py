@@ -37,5 +37,7 @@ def form_data():
     }
 
 @pytest.fixture
-def slug_for_args(note):
-    return (note.slug,)
+def not_author_client(django_user_model, client):
+    not_author = django_user_model.objects.create(username='Не автор')
+    client.force_login(not_author)
+    return client
